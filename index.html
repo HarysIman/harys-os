@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HARYS.OS — Portfolio</title>
+<meta name="description" content="Portfolio interaktif Harys Imanulloh — desainer & developer dari Purwokerto. Spesialis Rails, Next.js, dan produk digital.">
+
+<!-- Canonical & OG -->
+<link rel="canonical" href="https://harys.space">
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://harys.space">
+<meta property="og:title"       content="HARYS.OS — Portfolio Harys Imanulloh">
+<meta property="og:description" content="Desainer & developer dari Purwokerto. Spesialis Rails 8, Next.js, dan produk digital.">
+<meta property="og:image"       content="https://harys.space/og.png">
+<meta property="og:locale"      content="id_ID">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="HARYS.OS — Portfolio">
+<meta name="twitter:description" content="Desainer & developer dari Purwokerto.">
+<meta name="twitter:image"       content="https://harys.space/og.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0d14'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='20' font-weight='bold' fill='%23ff60ff'%3EH%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script>
+  // Terapkan tema tersimpan sebelum render (cegah flash)
+  (function() {
+    const t = localStorage.getItem('harys_theme') || 'dark';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+</head>
+<body>
+
+<!-- BOOT -->
+<div id="boot">
+  <div class="boot-logo">HARYS.OS</div>
+  <div class="boot-prog-wrap"><div class="boot-prog" id="bprog"></div></div>
+  <div class="boot-msg" id="bmsg">BOOTING...</div>
+</div>
+
+<!-- DESKTOP -->
+<div id="desktop">
+
+  <!-- ICONS -->
+  <div class="d-icons">
+    <div class="d-icon" ondblclick="openWin('about')">
+      <img class="d-img" src="assets/images/about.webp" alt="Ikon about" draggable="false" width="96" height="96" decoding="async">
+      <div class="d-lbl">about.txt</div>
+    </div>
+    <div class="d-icon" ondblclick="openWin('projects')">
+      <img class="d-img" src="assets/images/project.webp" alt="Ikon projects" draggable="false" width="96" height="96" decoding="async">
+      <div class="d-lbl">projects/</div>
+    </div>
+    <div class="d-icon" ondblclick="openWin('contact')">
+      <img class="d-img" src="assets/images/contact.webp" alt="Ikon contact" draggable="false" width="96" height="96" decoding="async">
+      <div class="d-lbl">contact</div>
+    </div>
+  </div>
+
+  <!-- WINDOW: About -->
+  <div class="win" id="win-about" style="width:420px;top:80px;left:110px;">
+    <div class="win-bar" onmousedown="drag(event,'win-about')">
+      <span class="win-title">about.txt</span>
+      <div class="win-btns">
+        <button class="wb wb-min" onclick="minWin('about')"></button>
+        <button class="wb wb-max" onclick="maxWin('win-about')"></button>
+        <button class="wb wb-close" onclick="closeWin('about')"></button>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="about-ascii"> H  A  R  Y  S
+ I  M  A  N  U  L  L  O  H</div>
+      <div class="about-name">Harys Imanulloh</div>
+      <div class="about-sub">PURWOKERTO · JAWA TENGAH · 1995</div>
+      <p class="about-p">Lahir dan menetap di Purwokerto. Sejak 2021 menjalankan <strong style="color:#e0e4ff">Pelan-pelan</strong> — studio kecil untuk orang yang ingin berpikir sebelum bergerak.</p>
+      <p class="about-p">Pekerjaan saya berputar di sekitar satu pertanyaan: <em style="color:var(--accent2)">apa yang sebenarnya ingin dicapai?</em> Klien datang saat bingung, kami duduk bersama dan memperlambat masalahnya terlebih dahulu.</p>
+      <p class="about-p">Di luar itu: musik instrumental, jalan sore, buku tebal yang tidak pernah selesai. Pendekatan saya sederhana — pahami dulu, baru bergerak.</p>
+      <div class="tags">
+        <span class="tag">Rails 8</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">Vanilla JS</span>
+        <span class="tag">Pelan-pelan</span>
+        <span class="tag">Est. 2021</span>
+        <span class="tag">Purwokerto</span>
+      </div>
+    </div>
+    <div class="win-status">UTF-8 · read-only · harys.space</div>
+  </div>
+
+  <!-- WINDOW: Projects -->
+  <div class="win" id="win-projects" style="width:500px;top:100px;left:190px;">
+    <div class="win-bar" onmousedown="drag(event,'win-projects')">
+      <span class="win-title">projects/</span>
+      <div class="win-btns">
+        <button class="wb wb-min" onclick="minWin('projects')"></button>
+        <button class="wb wb-max" onclick="maxWin('win-projects')"></button>
+        <button class="wb wb-close" onclick="closeWin('projects')"></button>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="proj-grid">
+        <a class="proj-card" href="https://hookkit.id" target="_blank" rel="noopener noreferrer">
+          <div class="proj-ico">[01]</div>
+          <div class="proj-name">HookKit</div>
+          <div class="proj-desc">345+ opening hook untuk creator video pendek Indonesia.</div>
+          <div class="proj-tech">Rails 8 · Produk Digital</div>
+        </a>
+        <a class="proj-card" href="#">
+          <div class="proj-ico">[02]</div>
+          <div class="proj-name">Team Todo</div>
+          <div class="proj-desc">App manajemen tugas tim — undangan, proyek bersama, Turbo.</div>
+          <div class="proj-tech">Rails 8 · Turbo · Tailwind</div>
+        </a>
+        <a class="proj-card" href="#">
+          <div class="proj-ico">[03]</div>
+          <div class="proj-name">Ghibli Portfolio</div>
+          <div class="proj-desc">Portofolio estetika Studio Ghibli — earth tone, serif organik.</div>
+          <div class="proj-tech">Next.js · Vanilla CSS</div>
+        </a>
+        <a class="proj-card" href="#">
+          <div class="proj-ico">[04]</div>
+          <div class="proj-name">Bubur Pak Anto</div>
+          <div class="proj-desc">Landing page warung bubur Banjarnegara — terracotta, lokal.</div>
+          <div class="proj-tech">HTML · CSS · JS</div>
+        </a>
+        <a class="proj-card" href="https://harys.space" target="_blank" rel="noopener noreferrer">
+          <div class="proj-ico">[05]</div>
+          <div class="proj-name">Portfolio Utama</div>
+          <div class="proj-desc">Situs portofolio utama — editorial, server-side, vanilla CSS.</div>
+          <div class="proj-tech">Rails 8 · Vanilla CSS</div>
+        </a>
+      </div>
+    </div>
+    <div class="win-status">5 items · dbl-click icon to reopen</div>
+  </div>
+
+  <!-- WINDOW: Contact -->
+  <div class="win" id="win-contact" style="width:310px;top:120px;left:360px;">
+    <div class="win-bar" onmousedown="drag(event,'win-contact')">
+      <span class="win-title">contact.cfg</span>
+      <div class="win-btns">
+        <button class="wb wb-min" onclick="minWin('contact')"></button>
+        <button class="wb wb-max" onclick="maxWin('win-contact')"></button>
+        <button class="wb wb-close" onclick="closeWin('contact')"></button>
+      </div>
+    </div>
+    <div class="win-body">
+      <a class="c-row" href="mailto:hello@harys.id">
+        <span class="c-ico">MAIL</span>
+        <div>
+          <div class="c-lbl">Email</div>
+          <div class="c-val">hello@harys.id</div>
+        </div>
+      </a>
+      <a class="c-row" href="https://wa.me/6285XXXXXXXXX" target="_blank" rel="noopener noreferrer">
+        <span class="c-ico"> WA </span>
+        <div>
+          <div class="c-lbl">WhatsApp</div>
+          <div class="c-val">+62 · · · · · · ·</div>
+        </div>
+      </a>
+      <a class="c-row" href="https://instagram.com/harys.id" target="_blank" rel="noopener noreferrer">
+        <span class="c-ico"> IG </span>
+        <div>
+          <div class="c-lbl">Instagram</div>
+          <div class="c-val">@harys.id</div>
+        </div>
+      </a>
+      <a class="c-row" href="https://linkedin.com/in/harys-imanulloh" target="_blank" rel="noopener noreferrer">
+        <span class="c-ico"> IN </span>
+        <div>
+          <div class="c-lbl">LinkedIn</div>
+          <div class="c-val">/in/harys-imanulloh</div>
+        </div>
+      </a>
+    </div>
+    <div class="win-status">Tersedia untuk proyek baru · 2026</div>
+  </div>
+
+  <!-- WINDOW: Music -->
+  <div class="win" id="win-music" style="width:460px;top:90px;left:300px;">
+    <div class="win-bar" onmousedown="drag(event,'win-music')">
+      <span class="win-title">music — spotify</span>
+      <div class="win-btns">
+        <button class="wb wb-min" onclick="minWin('music')"></button>
+        <button class="wb wb-max" onclick="maxWin('win-music')"></button>
+        <button class="wb wb-close" onclick="closeWin('music')"></button>
+      </div>
+    </div>
+    <div class="win-body" style="padding:0;">
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX1s9knjP51Oa?utm_source=generator&theme=0"
+              width="100%" height="352" frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+    </div>
+    <div class="win-status">Spotify · ganti playlist URL di kode</div>
+  </div>
+
+  <!-- WINDOW: Feedback -->
+  <div class="win" id="win-feedback" style="width:360px;top:100px;left:180px;">
+    <div class="win-bar" onmousedown="drag(event,'win-feedback')">
+      <span class="win-title">feedback.msg</span>
+      <div class="win-btns">
+        <button class="wb wb-min" onclick="minWin('feedback')"></button>
+        <button class="wb wb-max" onclick="maxWin('win-feedback')"></button>
+        <button class="wb wb-close" onclick="closeWin('feedback')"></button>
+      </div>
+    </div>
+    <div class="win-body">
+      <form class="fb-form" id="fb-form" onsubmit="submitFeedback(event)">
+        <div>
+          <div class="fb-label">Nama</div>
+          <input class="fb-input" id="fb-name" type="text" placeholder="Nama kamu..." required autocomplete="name">
+        </div>
+        <div>
+          <div class="fb-label">Email (opsional)</div>
+          <input class="fb-input" id="fb-email" type="email" placeholder="email@kamu.com" autocomplete="email">
+        </div>
+        <div>
+          <div class="fb-label">Pesan untuk Harys</div>
+          <textarea class="fb-textarea" id="fb-msg" placeholder="Tulis pesanmu di sini..." required></textarea>
+        </div>
+        <button class="fb-btn" type="submit" id="fb-submit">[ KIRIM PESAN ]</button>
+        <div class="fb-success" id="fb-success">✓ Pesan terkirim ke Harys!</div>
+        <div class="fb-error" id="fb-error" style="color:#ff8080;font-size:13px;text-align:center;padding:6px;display:none;">✗ Gagal kirim. Coba lagi.</div>
+      </form>
+    </div>
+    <div class="win-status" id="fb-status">Pesan langsung masuk ke email Harys</div>
+  </div>
+
+  <!-- WINDOW: Video -->
+  <div class="win" id="win-video" style="width:500px;top:110px;left:160px;">
+    <div class="win-bar" onmousedown="drag(event,'win-video')">
+      <span class="win-title">video.player</span>
+      <div class="win-btns">
+        <button class="wb wb-min" onclick="minWin('video')"></button>
+        <button class="wb wb-max" onclick="maxWin('win-video')"></button>
+        <button class="wb wb-close" onclick="closeWin('video')"></button>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="vid-row">
+        <input class="vid-input" id="vid-url" type="text"
+               placeholder="Tempel URL YouTube..."
+               value="https://www.youtube.com/watch?v=jfKfPfyJRdk">
+        <button class="vid-playbtn" onclick="loadVideo()">[ ▶ PLAY ]</button>
+      </div>
+      <div class="vid-wrap">
+        <iframe id="vid-frame"
+                src="https://www.youtube.com/embed/jfKfPfyJRdk"
+                allowfullscreen allow="autoplay"></iframe>
+      </div>
+    </div>
+    <div class="win-status">Tempel URL YouTube → tekan PLAY</div>
+  </div>
+
+  <!-- WINDOW: Settings -->
+  <div class="win" id="win-settings" style="width:300px;top:120px;left:240px;">
+    <div class="win-bar" onmousedown="drag(event,'win-settings')">
+      <span class="win-title">settings.cfg</span>
+      <div class="win-btns">
+        <button class="wb wb-min" onclick="minWin('settings')"></button>
+        <button class="wb wb-max" onclick="maxWin('win-settings')"></button>
+        <button class="wb wb-close" onclick="closeWin('settings')"></button>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="cfg-section">
+        <div class="cfg-heading">[ DISPLAY · THEME ]</div>
+        <div class="cfg-opt active" id="opt-dark" onclick="setTheme('dark')">
+          <span class="cfg-radio" id="radio-dark">▣</span>
+          <div class="cfg-opt-info">
+            <span class="cfg-opt-label">Dark Mode</span>
+            <span class="cfg-opt-sub">Neon · Purple · Night</span>
+          </div>
+        </div>
+        <div class="cfg-opt" id="opt-light" onclick="setTheme('light')">
+          <span class="cfg-radio" id="radio-light">□</span>
+          <div class="cfg-opt-info">
+            <span class="cfg-opt-label">Light Mode</span>
+            <span class="cfg-opt-sub">Clean · Lavender · Day</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="win-status">HARYS.OS · System Preferences</div>
+  </div>
+
+  <!-- TASKBAR -->
+  <div id="taskbar">
+    <div class="tb-start" onclick="toggleSMenu()">[ START ]</div>
+    <div class="tb-sep"></div>
+
+    <!-- MAC MENU BAR -->
+    <div class="tb-menus" id="tb-menus">
+      <div class="tb-menu-item" id="mi-file">
+        <span class="tb-menu-label" onclick="toggleMenu('mi-file')">File</span>
+        <div class="tb-dropdown">
+          <div class="dd-item" onclick="openWin('about');closeAllMenus()">about.txt<span class="dd-hint">⌘1</span></div>
+          <div class="dd-item" onclick="openWin('projects');closeAllMenus()">projects/<span class="dd-hint">⌘2</span></div>
+          <div class="dd-item" onclick="openWin('contact');closeAllMenus()">contact.cfg<span class="dd-hint">⌘3</span></div>
+          <div class="dd-sep"></div>
+          <div class="dd-item" onclick="closeAllWins();closeAllMenus()">Close All<span class="dd-hint">⌘⇧W</span></div>
+        </div>
+      </div>
+      <div class="tb-menu-item" id="mi-edit">
+        <span class="tb-menu-label" onclick="toggleMenu('mi-edit')">Edit</span>
+        <div class="tb-dropdown">
+          <div class="dd-item" onclick="copySiteURL();closeAllMenus()">Copy Site URL<span class="dd-hint">⌘C</span></div>
+          <div class="dd-sep"></div>
+          <div class="dd-item" onclick="openWin('settings');closeAllMenus()">Settings…<span class="dd-hint">⌘,</span></div>
+        </div>
+      </div>
+      <div class="tb-menu-item" id="mi-view">
+        <span class="tb-menu-label" onclick="toggleMenu('mi-view')">View</span>
+        <div class="tb-dropdown">
+          <div class="dd-item" id="view-dark"  onclick="setTheme('dark');closeAllMenus()">Dark Mode</div>
+          <div class="dd-item" id="view-light" onclick="setTheme('light');closeAllMenus()">Light Mode</div>
+        </div>
+      </div>
+      <div class="tb-menu-item" id="mi-window">
+        <span class="tb-menu-label" onclick="toggleMenu('mi-window')">Window</span>
+        <div class="tb-dropdown">
+          <div class="dd-item" onclick="openWin('about');closeAllMenus()">about.txt</div>
+          <div class="dd-item" onclick="openWin('projects');closeAllMenus()">projects/</div>
+          <div class="dd-item" onclick="openWin('contact');closeAllMenus()">contact.cfg</div>
+          <div class="dd-item" onclick="openWin('music');closeAllMenus()">music</div>
+          <div class="dd-item" onclick="openWin('feedback');closeAllMenus()">feedback.msg</div>
+          <div class="dd-item" onclick="openWin('video');closeAllMenus()">video.player</div>
+          <div class="dd-item" onclick="openWin('settings');closeAllMenus()">settings.cfg</div>
+          <div class="dd-sep"></div>
+          <div class="dd-item" onclick="minimizeAllWins();closeAllMenus()">Minimize All</div>
+          <div class="dd-item" onclick="closeAllWins();closeAllMenus()">Close All</div>
+        </div>
+      </div>
+      <div class="tb-menu-item" id="mi-help">
+        <span class="tb-menu-label" onclick="toggleMenu('mi-help')">Help</span>
+        <div class="tb-dropdown">
+          <div class="dd-item" onclick="openWin('about');closeAllMenus()">About HARYS.OS</div>
+          <div class="dd-sep"></div>
+          <div class="dd-item" onclick="window.open('https://harys.space','_blank');closeAllMenus()">harys.space ↗</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tb-sep"></div>
+    <div class="tb-wins" id="tb-wins"></div>
+    <div class="tb-sep"></div>
+    <div class="tb-clock" id="tb-clock">--:--:--</div>
+  </div>
+
+  <!-- START MENU -->
+  <div id="smenu">
+    <div class="sm-head">HARYS.OS v2026.1</div>
+    <div class="sm-item" onclick="openWin('about');closeSMenu()">
+      <span class="sm-ico">.TXT</span> about.txt
+    </div>
+    <div class="sm-item" onclick="openWin('projects');closeSMenu()">
+      <span class="sm-ico">/DIR</span> projects/
+    </div>
+    <div class="sm-item" onclick="openWin('contact');closeSMenu()">
+      <span class="sm-ico">[ @ ]</span> contact
+    </div>
+    <div class="sm-div"></div>
+    <div class="sm-item" onclick="openWin('music');closeSMenu()">
+      <span class="sm-ico"> ♫ </span> music
+    </div>
+    <div class="sm-item" onclick="openWin('feedback');closeSMenu()">
+      <span class="sm-ico">MSG</span> feedback
+    </div>
+    <div class="sm-item" onclick="openWin('video');closeSMenu()">
+      <span class="sm-ico"> ▶ </span> video
+    </div>
+    <div class="sm-div"></div>
+    <div class="sm-item" onclick="openWin('settings');closeSMenu()">
+      <span class="sm-ico"> ⚙ </span> settings
+    </div>
+  </div>
+
+</div>
+
+<!-- DOCK (bottom center) -->
+<div id="dock">
+  <div class="dock-icon" onclick="openWin('music')" title="Music">
+    <img class="dock-img" src="assets/images/music.webp" alt="Music" width="72" height="72" draggable="false" decoding="async">
+    <div class="dock-lbl">music</div>
+  </div>
+  <div class="dock-icon" onclick="openWin('feedback')" title="Feedback">
+    <img class="dock-img" src="assets/images/feedback.webp" alt="Feedback" width="72" height="72" draggable="false" decoding="async">
+    <div class="dock-lbl">feedback</div>
+  </div>
+  <div class="dock-icon" onclick="openWin('video')" title="Video">
+    <img class="dock-img" src="assets/images/video.webp" alt="Video" width="72" height="72" draggable="false" decoding="async">
+    <div class="dock-lbl">video</div>
+  </div>
+  <div class="dock-icon" onclick="openWin('settings')" title="Settings">
+    <div class="dock-art" data-icon="settings"></div>
+    <div class="dock-lbl">settings</div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

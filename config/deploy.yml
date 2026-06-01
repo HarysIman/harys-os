@@ -1,0 +1,24 @@
+service: harys-id
+image: harysiman/harys-os
+
+servers:
+  web:
+    - 202.74.75.35
+
+proxy:
+  ssl: true
+  hosts:
+    - harys.space
+    - www.harys.space
+
+registry:
+  server: ghcr.io
+  username: HarysIman
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+
+ssh:
+  user: ubuntu
