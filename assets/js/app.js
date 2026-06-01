@@ -17,6 +17,7 @@ function openWin(k) {
   w.open = true; w.min = false;
   el(w.id).style.display = 'flex';
   front(k); renderTB();
+  playTap('open');
 }
 function closeWin(k) {
   const w = WS[k]; if (!w) return;
@@ -25,6 +26,7 @@ function closeWin(k) {
   e.style.display = 'none';
   e.classList.remove('active');
   renderTB();
+  playTap('close');
 }
 function minWin(k) {
   const w = WS[k]; if (!w) return;
@@ -33,6 +35,7 @@ function minWin(k) {
   e.style.display = 'none';
   e.classList.remove('active');
   renderTB();
+  playTap('click');
 }
 function maxWin(winId) {
   if (isMobile()) return;
@@ -287,8 +290,14 @@ function startGlitter(iconEl) {
   }, 450);
 }
 
-document.querySelectorAll('.d-icon').forEach(startGlitter);
-document.querySelectorAll('.dock-icon').forEach(startGlitter);
+document.querySelectorAll('.d-icon').forEach(icon => {
+  startGlitter(icon);
+  icon.addEventListener('click', () => playTap('click'));
+});
+document.querySelectorAll('.dock-icon').forEach(icon => {
+  startGlitter(icon);
+  icon.addEventListener('click', () => playTap('click'));
+});
 
 // Desktop pixel art icons (7px per pixel)
 document.querySelectorAll('.d-art[data-icon]').forEach(el => {
@@ -381,12 +390,95 @@ function setTheme(t) {
   document.documentElement.dataset.theme = t;
 })();
 
+// ── TAP SOUND ──
+function playTap(type = 'click') {
+  try {
+    const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    if (type === 'open') {
+      // Buka window: dua nada naik
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(660, ctx.currentTime);
+      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.06);
+      gain.gain.setValueAtTime(0.07, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.14);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.14);
+    } else if (type === 'close') {
+      // Tutup window: nada turun
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(660, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(330, ctx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.12);
+    } else {
+      // Klik biasa: tick pendek
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(1100, ctx.currentTime);
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.05);
+    }
+  } catch (_) {}
+}
+
+// ── BOOT SOUND ──
+function playBootSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Arpeggio nada: C5 → E5 → G5 → C6 (startup chime retro)
+    const notes = [
+      { freq: 523.25, start: 0.00, dur: 0.18 },
+      { freq: 659.25, start: 0.14, dur: 0.18 },
+      { freq: 783.99, start: 0.28, dur: 0.18 },
+      { freq: 1046.5, start: 0.42, dur: 0.55 },
+    ];
+
+    notes.forEach(({ freq, start, dur }) => {
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
+
+      // Envelope: fade in cepat, fade out halus
+      gain.gain.setValueAtTime(0, ctx.currentTime + start);
+      gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+
+      osc.start(ctx.currentTime + start);
+      osc.stop(ctx.currentTime + start + dur);
+    });
+  } catch (_) {}
+}
+
 // ── BOOT ──
-window.addEventListener('load', () => {
-  const prog = el('bprog');
-  const msg  = el('bmsg');
-  const boot = el('boot');
-  const msgs = ['LOADING KERNEL...', 'MOUNTING FILESYSTEM...', 'STARTING SERVICES...', 'WELCOME.'];
+function startBoot() {
+  const preboot = el('preboot');
+  const boot    = el('boot');
+  const prog    = el('bprog');
+  const msg     = el('bmsg');
+  const msgs    = ['LOADING KERNEL...', 'MOUNTING FILESYSTEM...', 'STARTING SERVICES...', 'WELCOME.'];
+
+  // Fade out pre-boot, tampilkan boot screen
+  preboot.classList.add('out');
+  setTimeout(() => {
+    preboot.style.display = 'none';
+    boot.style.display = 'flex';
+  }, 500);
+
+  playBootSound();
+
   let i = 0;
   prog.style.width = '8%';
   const iv = setInterval(() => {
@@ -413,4 +505,8 @@ window.addEventListener('load', () => {
       }, 350);
     }
   }, 520);
+}
+
+window.addEventListener('load', () => {
+  el('preboot').addEventListener('click', startBoot, { once: true });
 });

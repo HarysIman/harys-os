@@ -3,6 +3,35 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 100%; height: 100%; overflow: hidden; }
 
+/* ── PRE-BOOT ── */
+#preboot {
+  position: fixed; inset: 0; z-index: 10000;
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+#preboot.out { opacity: 0; pointer-events: none; }
+.pb-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  font-family: 'Press Start 2P', monospace;
+  text-align: center;
+}
+.pb-logo {
+  font-size: 28px; color: #ff60ff;
+  text-shadow: 0 0 20px #ff00cc, 0 0 40px #cc00ff;
+  letter-spacing: 6px;
+}
+.pb-year {
+  font-size: 9px; color: #6040a0; letter-spacing: 3px;
+}
+.pb-prompt {
+  font-size: 9px; color: #c060e0; letter-spacing: 2px;
+  animation: blink-prompt 1.1s step-end infinite;
+  margin-top: 20px;
+}
+@keyframes blink-prompt { 0%,100%{opacity:1} 50%{opacity:0} }
+
 /* ── VARS ── */
 :root {
   --bg:          #0a0d14;
