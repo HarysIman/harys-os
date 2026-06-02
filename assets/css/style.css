@@ -201,22 +201,26 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
 
 /* Win95 3D button */
 .wb {
-  width: 16px; height: 14px; padding: 0;
-  background: #c0c0c0;
-  border: 1px solid;
-  border-color: #ffffff #000000 #000000 #ffffff;
-  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+  width: 14px; height: 14px; padding: 0;
+  border-radius: 50%;
+  border: none;
   cursor: pointer; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  color: #000000; transition: none;
+  transition: filter .15s, transform .1s;
+  position: relative;
 }
-.wb:hover { background: #d0d0d0; }
-.wb:active {
-  border-color: #000000 #ffffff #ffffff #000000;
-  box-shadow: inset -1px -1px 0 #dfdfdf, inset 1px 1px 0 #808080;
-  padding-top: 1px; padding-left: 1px;
-}
-.wb svg { pointer-events: none; image-rendering: pixelated; }
+.wb:hover  { filter: brightness(1.2); transform: scale(1.1); }
+.wb:active { transform: scale(0.92); }
+.wb svg    { pointer-events: none; image-rendering: pixelated; opacity: 0; transition: opacity .15s; }
+.wb:hover svg { opacity: 1; }
+
+/* Warna per tombol */
+.wb-close  { background: #ff5f57; box-shadow: 0 0 0 1px rgba(0,0,0,.25); }
+.wb-min    { background: #febc2e; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
+.wb-max    { background: #28c840; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
+
+/* Icon SVG warna gelap agar keliatan saat hover */
+.wb-close svg, .wb-min svg, .wb-max svg { fill: rgba(0,0,0,.55); }
 
 /* Content */
 .win-body {
