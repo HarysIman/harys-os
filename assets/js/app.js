@@ -292,7 +292,14 @@ function startGlitter(iconEl) {
 
 document.querySelectorAll('.d-icon').forEach(icon => {
   startGlitter(icon);
-  icon.addEventListener('click', () => playTap('click'));
+  icon.addEventListener('click', () => {
+    playTap('click');
+    // Di mobile: satu tap langsung buka window (ondblclick tidak bekerja di touchscreen)
+    if (isMobile()) {
+      const match = icon.getAttribute('ondblclick')?.match(/openWin\('(\w+)'\)/);
+      if (match) openWin(match[1]);
+    }
+  });
 });
 document.querySelectorAll('.dock-icon').forEach(icon => {
   startGlitter(icon);
