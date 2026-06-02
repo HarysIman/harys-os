@@ -330,45 +330,6 @@ document.querySelectorAll('.wb-close').forEach(el => {
 });
 
 // ── FEEDBACK (Formspree) ──
-// Daftar gratis di https://formspree.io → buat form → salin endpoint ke sini
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/GANTI_ENDPOINT_INI';
-
-async function submitFeedback(e) {
-  e.preventDefault();
-  const name  = el('fb-name').value.trim();
-  const email = el('fb-email').value.trim();
-  const msg   = el('fb-msg').value.trim();
-  if (!name || !msg) return;
-
-  const btn = el('fb-submit');
-  btn.textContent = '[ MENGIRIM... ]';
-  btn.disabled    = true;
-  el('fb-error').style.display = 'none';
-
-  try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body:    JSON.stringify({ name, email, message: msg }),
-    });
-    if (res.ok) {
-      el('fb-name').value  = '';
-      el('fb-email').value = '';
-      el('fb-msg').value   = '';
-      const ok = el('fb-success');
-      ok.style.display = 'block';
-      setTimeout(() => ok.style.display = 'none', 4000);
-    } else {
-      el('fb-error').style.display = 'block';
-    }
-  } catch (_) {
-    el('fb-error').style.display = 'block';
-  }
-
-  btn.textContent = '[ KIRIM PESAN ]';
-  btn.disabled    = false;
-}
-
 // ── VIDEO ──
 function loadVideo() {
   const raw   = el('vid-url').value.trim();
@@ -390,6 +351,15 @@ function setTheme(t) {
     if (radio) radio.textContent = active ? '▣' : '□';
     if (view)  view.classList.toggle('check', active);
   });
+  // Sync tema Giscus
+  const giscusTheme = t === 'light' ? 'light' : 'dark_dimmed';
+  const iframe = document.querySelector('iframe.giscus-frame');
+  if (iframe) {
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: giscusTheme } } },
+      'https://giscus.app'
+    );
+  }
 }
 // Terapkan tema tersimpan segera (sebelum render)
 (function() {

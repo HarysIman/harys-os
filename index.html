@@ -216,36 +216,36 @@
     <div class="win-status">Spotify · ganti playlist URL di kode</div>
   </div>
 
-  <!-- WINDOW: Feedback -->
-  <div class="win" id="win-feedback" style="width:360px;top:100px;left:180px;">
+  <!-- WINDOW: Feedback / Comments -->
+  <div class="win" id="win-feedback" style="width:480px;top:100px;left:180px;">
     <div class="win-bar" onmousedown="drag(event,'win-feedback')">
-      <span class="win-title">feedback.msg</span>
+      <span class="win-title">comments.log</span>
       <div class="win-btns">
         <button class="wb wb-min" onclick="minWin('feedback')"></button>
         <button class="wb wb-max" onclick="maxWin('win-feedback')"></button>
         <button class="wb wb-close" onclick="closeWin('feedback')"></button>
       </div>
     </div>
-    <div class="win-body">
-      <form class="fb-form" id="fb-form" onsubmit="submitFeedback(event)">
-        <div>
-          <div class="fb-label">Nama</div>
-          <input class="fb-input" id="fb-name" type="text" placeholder="Nama kamu..." required autocomplete="name">
-        </div>
-        <div>
-          <div class="fb-label">Email (opsional)</div>
-          <input class="fb-input" id="fb-email" type="email" placeholder="email@kamu.com" autocomplete="email">
-        </div>
-        <div>
-          <div class="fb-label">Pesan untuk Harys</div>
-          <textarea class="fb-textarea" id="fb-msg" placeholder="Tulis pesanmu di sini..." required></textarea>
-        </div>
-        <button class="fb-btn" type="submit" id="fb-submit">[ KIRIM PESAN ]</button>
-        <div class="fb-success" id="fb-success">✓ Pesan terkirim ke Harys!</div>
-        <div class="fb-error" id="fb-error" style="color:#ff8080;font-size:13px;text-align:center;padding:6px;display:none;">✗ Gagal kirim. Coba lagi.</div>
-      </form>
+    <div class="win-body" style="padding:0; overflow:hidden;">
+      <script src="https://giscus.app/client.js"
+        data-repo="HarysIman/harys-os"
+        data-repo-id="R_kgDOSuDTcA"
+        data-category="General"
+        data-category-id="DIC_kwDOSuDTcM4C-Xkj"
+        data-mapping="specific"
+        data-term="Portfolio OS — Comments"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark_dimmed"
+        data-lang="id"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+      </script>
     </div>
-    <div class="win-status" id="fb-status">Pesan langsung masuk ke email Harys</div>
+    <div class="win-status">Login GitHub untuk berkomentar</div>
   </div>
 
   <!-- WINDOW: Video -->
