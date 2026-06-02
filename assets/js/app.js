@@ -18,6 +18,7 @@ function openWin(k) {
   el(w.id).style.display = 'flex';
   front(k); renderTB();
   playTap('open');
+  if (k === 'feedback') loadComments();
 }
 function closeWin(k) {
   const w = WS[k]; if (!w) return;
@@ -330,6 +331,69 @@ document.querySelectorAll('.wb-close').forEach(el => {
 });
 
 // ── FEEDBACK (Formspree) ──
+// ── COMMENTS API ──
+const API_URL = 'https://api.harys.space';
+
+function escapeHTML(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+async function loadComments() {
+  const list = el('comments-list');
+  const stat = el('fb-status');
+  if (!list) return;
+  try {
+    const res = await fetch(`${API_URL}/comments`);
+    const data = await res.json();
+    if (stat) stat.textContent = `${data.length} komentar`;
+    if (!data.length) {
+      list.innerHTML = '<div class="fb-empty">Belum ada komentar. Jadilah yang pertama!</div>';
+      return;
+    }
+    list.innerHTML = data.map(c => {
+      const d = new Date(c.created_at);
+      const time = d.toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
+      return `<div class="fb-msg-item">
+        <div class="fb-msg-meta">${escapeHTML(c.name)} · ${time}</div>
+        <div class="fb-msg-text">${escapeHTML(c.message)}</div>
+      </div>`;
+    }).join('');
+  } catch (_) {
+    list.innerHTML = '<div class="fb-empty">Gagal memuat komentar.</div>';
+  }
+}
+
+async function submitComment(e) {
+  e.preventDefault();
+  const name = el('fb-name').value.trim();
+  const msg  = el('fb-msg').value.trim();
+  if (!name || !msg) return;
+  const btn = el('fb-submit');
+  btn.textContent = '[ MENGIRIM... ]';
+  btn.disabled = true;
+  el('fb-error').style.display = 'none';
+  try {
+    const res = await fetch(`${API_URL}/comments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, message: msg }),
+    });
+    if (res.ok || res.status === 201) {
+      el('fb-name').value = '';
+      el('fb-msg').value  = '';
+      el('fb-success').style.display = 'block';
+      setTimeout(() => el('fb-success').style.display = 'none', 3000);
+      loadComments();
+    } else {
+      el('fb-error').style.display = 'block';
+    }
+  } catch (_) {
+    el('fb-error').style.display = 'block';
+  }
+  btn.textContent = '[ KIRIM ]';
+  btn.disabled = false;
+}
+
 // ── VIDEO ──
 function loadVideo() {
   const raw   = el('vid-url').value.trim();

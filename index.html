@@ -218,7 +218,7 @@
   </div>
 
   <!-- WINDOW: Feedback / Comments -->
-  <div class="win" id="win-feedback" style="width:480px;top:100px;left:180px;">
+  <div class="win" id="win-feedback" style="width:420px;top:100px;left:180px;">
     <div class="win-bar" onmousedown="drag(event,'win-feedback')">
       <span class="win-title">comments.log</span>
       <div class="win-btns">
@@ -227,26 +227,26 @@
         <button class="wb wb-close" onclick="closeWin('feedback')"></button>
       </div>
     </div>
-    <div class="win-body" style="padding:0; overflow:hidden;">
-      <script src="https://giscus.app/client.js"
-        data-repo="HarysIman/harys-os"
-        data-repo-id="R_kgDOSuDTcA"
-        data-category="General"
-        data-category-id="DIC_kwDOSuDTcM4C-Xkj"
-        data-mapping="specific"
-        data-term="Portfolio OS — Comments"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="dark_dimmed"
-        data-lang="id"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-      </script>
+    <div class="win-body">
+      <!-- Form -->
+      <form class="fb-form" id="fb-form" onsubmit="submitComment(event)">
+        <div>
+          <div class="fb-label">Nama</div>
+          <input class="fb-input" id="fb-name" type="text" placeholder="Nama kamu..." required autocomplete="name">
+        </div>
+        <div>
+          <div class="fb-label">Pesan</div>
+          <textarea class="fb-textarea" id="fb-msg" placeholder="Tulis pesanmu..." required></textarea>
+        </div>
+        <button class="fb-btn" type="submit" id="fb-submit">[ KIRIM ]</button>
+        <div class="fb-success" id="fb-success" style="display:none;">✓ Komentar terkirim!</div>
+        <div class="fb-error"   id="fb-error"   style="display:none;">✗ Gagal kirim. Coba lagi.</div>
+      </form>
+      <hr class="fb-divider">
+      <!-- Daftar komentar -->
+      <div id="comments-list"><div class="fb-empty">Memuat komentar...</div></div>
     </div>
-    <div class="win-status">Login GitHub untuk berkomentar</div>
+    <div class="win-status" id="fb-status">0 komentar</div>
   </div>
 
   <!-- WINDOW: Video -->
