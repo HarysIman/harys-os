@@ -211,8 +211,14 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
 }
 .wb:hover  { filter: brightness(1.2); transform: scale(1.1); }
 .wb:active { transform: scale(0.92); }
-.wb svg    { pointer-events: none; image-rendering: pixelated; opacity: 0; transition: opacity .15s; }
+.wb svg    { pointer-events: none; image-rendering: pixelated; opacity: 0.7; }
 .wb:hover svg { opacity: 1; }
+
+@media (hover: none) {
+  /* Touch device: icon selalu kelihatan, tombol lebih besar untuk jari */
+  .wb     { width: 18px; height: 18px; }
+  .wb svg { opacity: 1; }
+}
 
 /* Warna per tombol */
 .wb-close  { background: #ff5f57; box-shadow: 0 0 0 1px rgba(0,0,0,.25); }
