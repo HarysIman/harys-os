@@ -551,3 +551,65 @@ function startBoot() {
 window.addEventListener('load', () => {
   el('preboot').addEventListener('click', startBoot, { once: true });
 });
+
+// ── SCREENSAVER ──
+const IDLE_MS = 30000;
+let idleTimer = null;
+let ssX = 60, ssY = 60, ssDX = 2.2, ssDY = 1.6;
+let ssRaf = null;
+const SS_COLORS = [
+  ['#ff60ff', '0 0 20px #ff00cc, 0 0 40px #cc00ff'],
+  ['#60ffff', '0 0 20px #00ccff, 0 0 40px #0099cc'],
+  ['#ffff60', '0 0 20px #ffcc00, 0 0 40px #ff9900'],
+  ['#60ff99', '0 0 20px #00ff66, 0 0 40px #00cc44'],
+  ['#ff9960', '0 0 20px #ff6600, 0 0 40px #cc4400'],
+];
+let ssColorIdx = 0;
+
+function showScreensaver() {
+  el('screensaver').classList.add('active');
+  ssX = Math.random() * 200 + 40;
+  ssY = Math.random() * 100 + 40;
+  animateSS();
+}
+
+function hideScreensaver() {
+  el('screensaver').classList.remove('active');
+  if (ssRaf) { cancelAnimationFrame(ssRaf); ssRaf = null; }
+}
+
+function animateSS() {
+  const ss   = el('screensaver');
+  const txt  = el('ss-text');
+  const maxX = ss.offsetWidth  - txt.offsetWidth;
+  const maxY = ss.offsetHeight - txt.offsetHeight - 50;
+
+  ssX += ssDX; ssY += ssDY;
+
+  if (ssX <= 0 || ssX >= maxX) {
+    ssDX *= -1;
+    ssX = Math.max(0, Math.min(ssX, maxX));
+    ssColorIdx = (ssColorIdx + 1) % SS_COLORS.length;
+    txt.style.color      = SS_COLORS[ssColorIdx][0];
+    txt.style.textShadow = SS_COLORS[ssColorIdx][1];
+  }
+  if (ssY <= 0 || ssY >= maxY) {
+    ssDY *= -1;
+    ssY = Math.max(0, Math.min(ssY, maxY));
+  }
+
+  txt.style.left = ssX + 'px';
+  txt.style.top  = ssY + 'px';
+  ssRaf = requestAnimationFrame(animateSS);
+}
+
+function resetIdle() {
+  clearTimeout(idleTimer);
+  if (el('screensaver').classList.contains('active')) hideScreensaver();
+  idleTimer = setTimeout(showScreensaver, IDLE_MS);
+}
+
+['mousemove','mousedown','keydown','touchstart','scroll','click','wheel']
+  .forEach(ev => document.addEventListener(ev, resetIdle, { passive: true }));
+
+resetIdle();
