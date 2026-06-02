@@ -320,13 +320,13 @@ document.querySelectorAll('.dock-art[data-icon]').forEach(el => {
 
 // Win95 button icons (2px per pixel)
 document.querySelectorAll('.wb-min').forEach(el => {
-  el.innerHTML = makeSVG(ICONS['btn-min'], 2);
+  el.innerHTML = makeSVG(ICONS['btn-min'], 1);
 });
 document.querySelectorAll('.wb-max').forEach(el => {
-  el.innerHTML = makeSVG(ICONS['btn-max'], 2);
+  el.innerHTML = makeSVG(ICONS['btn-max'], 1);
 });
 document.querySelectorAll('.wb-close').forEach(el => {
-  el.innerHTML = makeSVG(ICONS['btn-close'], 2);
+  el.innerHTML = makeSVG(ICONS['btn-close'], 1);
 });
 
 // ── FEEDBACK (Formspree) ──
