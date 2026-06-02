@@ -1,3 +1,5 @@
 .DS_Store
 *.png
+!favicon-32.png
+!favicon-180.png
 
